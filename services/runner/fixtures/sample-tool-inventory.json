@@ -1,0 +1,13 @@
+{
+  "source": "RealClaw-style wallet agent demo inventory",
+  "network": true,
+  "shell": false,
+  "filesystem": false,
+  "declaredCapabilities": ["portfolio_read", "mantle_network_read", "receipt_write"],
+  "observedCapabilities": ["portfolio_read", "mantle_network_read", "receipt_write"],
+  "capabilityNotes": [
+    "Network access is declared and allowed by policy.",
+    "Shell execution is not present.",
+    "No local filesystem capability is exposed."
+  ]
+}

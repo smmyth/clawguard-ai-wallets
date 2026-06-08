@@ -1,0 +1,24 @@
+{
+  "name": "clawguard",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Mantle trust receipts for AI wallet agents.",
+  "workspaces": [
+    "contracts",
+    "services/runner",
+    "web"
+  ],
+  "scripts": {
+    "build": "npm run build -w contracts && npm run build -w runner && npm run build -w web",
+    "test": "npm run test -w contracts && npm run test -w runner && npm run test -w web",
+    "lint": "npm run lint -w web",
+    "dev:web": "npm run dev -w web",
+    "demo:runner": "npm run demo -w runner"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.4"
+  }
+}

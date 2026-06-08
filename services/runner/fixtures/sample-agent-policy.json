@@ -1,0 +1,11 @@
+{
+  "agentId": "1",
+  "agentName": "Personal CFO Agent",
+  "maxRisk": 40,
+  "allowShell": false,
+  "allowNetwork": true,
+  "allowedProtocols": ["Mantle native staking", "mETH low-risk routing", "USDY observation only"],
+  "blockedActions": ["unknown contract call", "high slippage swap", "shell execution", "unbounded leverage"],
+  "maxSlippageBps": 50,
+  "requiresHumanApprovalAboveRisk": 30
+}
