@@ -22,12 +22,14 @@ Date: 2026-06-08
 
 - Address: `0x12c186925ab7f8ad88a322ee057E4A68e22c88A8`
 - Explorer: https://explorer.sepolia.mantle.xyz/address/0x12c186925ab7f8ad88a322ee057E4A68e22c88A8
+- Mantle Explorer status: `Contract: Verified`
 - Sourcify full match: https://repo.sourcify.dev/contracts/full_match/5003/0x12c186925ab7f8ad88a322ee057E4A68e22c88A8/
 
 ### AgentRunLedger
 
 - Address: `0x6b349c752661Fdf085e48053E3186742b3a0D4d2`
 - Explorer: https://explorer.sepolia.mantle.xyz/address/0x6b349c752661Fdf085e48053E3186742b3a0D4d2
+- Mantle Explorer status: `Contract: Verified`
 - Sourcify full match: https://repo.sourcify.dev/contracts/full_match/5003/0x6b349c752661Fdf085e48053E3186742b3a0D4d2/
 
 ## Live Runner Receipt
@@ -62,6 +64,8 @@ Runner stderr from the clean run was empty.
 - GitHub Pages status observed as `built`.
 - HTML, CSS, JS, and proof JSON returned HTTP `200`.
 
-## Verification Caveat
+## Verification Evidence
 
-Hardhat verification against the Mantle explorer Etherscan-style endpoint returned HTML/503 responses, so the contracts are documented as Sourcify full-match verified. Do not claim successful Etherscan-style explorer API verification unless the explorer endpoint is retried and confirmed later.
+Both deployed contracts are visible as verified contracts on the Mantle Sepolia explorer. Both contracts also have Sourcify full-match verification for chain `5003`.
+
+Earlier Hardhat verification calls against the Mantle explorer Etherscan-style API returned HTML/503 responses. That API behavior should not be described as a successful Hardhat API verification, but the public explorer pages and Sourcify records now provide the submission evidence needed for "contract verified on Mantle Explorer."

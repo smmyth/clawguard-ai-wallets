@@ -39,7 +39,7 @@ Live receipt proof:
 - Proof URI: `/proofs/generated/run-3-allowed.json`
 - Public proof JSON: https://smmyth.github.io/clawguard-ai-wallets-demo/proofs/generated/run-3-allowed.json
 
-Note: Sourcify verification succeeded with full bytecode/source matches. The Mantle explorer Etherscan-style API returned HTML/503 during Hardhat verification, so the README claims Sourcify verification rather than claiming explorer UI source verification.
+Note: both contracts are visible as verified contracts on the Mantle Sepolia explorer, and both also have Sourcify full-match verification for chain `5003`.
 
 ## Architecture
 
@@ -109,7 +109,7 @@ Safe claims:
 
 - "ClawGuard demonstrates a trust receipt layer for RealClaw-style AI wallet agents."
 - "Contracts are deployed on Mantle Sepolia."
-- "Contract source is verified on Sourcify with full match for chain `5003`."
+- "Contract source is verified on Mantle Explorer and Sourcify with full match for chain `5003`."
 - "A live `RunRequested` event was audited by the runner and recorded through `RunAudited`."
 - "The public frontend links to the Mantle receipt and proof JSON."
 

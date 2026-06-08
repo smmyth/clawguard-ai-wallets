@@ -24,8 +24,9 @@ The demo uses Mantle Sepolia chain `5003` for public, low-cost trust receipts. T
 - Live `runId=3` request tx: `0x1c0ea9e90c9910152b6815a3e9e79b82fef29cf939ea80a020c24fe30fe26118`
 - Live `runId=3` audit tx: `0x8888ee04c7d527982390b5b6237c4ccf3dd6b1d26a28de28cf4b356291be35d4`
 - Proof JSON: https://smmyth.github.io/clawguard-ai-wallets-demo/proofs/generated/run-3-allowed.json
-- Sourcify full-match verification exists for both contracts.
-- Demo video: `submission/clawguard-demo.webm`
+- Mantle Explorer shows `Contract: Verified` for both contracts.
+- Sourcify full-match verification exists for both contracts on chain `5003`.
+- Demo video: https://smmyth.github.io/clawguard-ai-wallets-demo/submission/clawguard-demo.webm
 
 ## Product Wedge
 
@@ -38,19 +39,19 @@ Safe to claim:
 - ClawGuard is deployed on Mantle Sepolia.
 - The runner audited a live request and recorded `RunAudited`.
 - The public frontend shows policy, instruction, verdict, proof, and explorer links.
-- The contracts are Sourcify full-match verified.
+- The contracts are verified on Mantle Explorer and Sourcify full-match verified.
 
 Do not claim:
 
 - Production Byreal/RealClaw integration.
 - Mainnet custody.
 - OpenAI rationale unless the optional key-backed path is exercised.
-- Mantle explorer API verification beyond Sourcify full match.
+- Successful Hardhat Etherscan-style API verification, because the explorer API returned HTML/503 earlier even though the public explorer UI now shows verified contracts.
 
 ## Prize Fit
 
-- 20 Project Deployment Award: deployed contracts, public app, live receipt.
-- Agentic Economy: designed around AI wallet agents and trustable autonomous action.
+- 20 Project Deployment Award: strongest fit; deployed contracts, verified source, public app, live receipt, public video, and README evidence.
+- Agentic Economy: adjacent fit as a trust layer for RealClaw-style AI wallet workflows; do not present it as a production Byreal/RealClaw core-capability integration unless that integration is added.
 - AI DevTools: a receipt/audit layer developers can integrate into agent runners.
 - UI/UX: first screen is the product workflow, with replay and wallet modes.
 - Community Voting: clear story: would you trust an AI wallet, and where is the proof?

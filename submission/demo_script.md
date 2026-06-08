@@ -56,7 +56,7 @@ Close with deployment evidence.
 
 Narration:
 
-The contracts are deployed on Mantle Sepolia chain 5003 and verified with Sourcify full match. ClawGuard is not claiming production custody. It is a focused trust receipt layer for wallet agents, ready to integrate with RealClaw-style workflows.
+The contracts are deployed on Mantle Sepolia chain 5003 and verified on Mantle Explorer, with Sourcify full match as additional evidence. ClawGuard is not claiming production custody. It is a focused trust receipt layer for wallet agents, ready to integrate with RealClaw-style workflows.
 
 ## Links To Show
 
