@@ -318,7 +318,7 @@ Add this exact section near the deployment evidence:
 Safe today:
 
 - Deployed on Mantle Sepolia chain `5003`.
-- Contracts are verified on Mantle Explorer and Sourcify full-match verified.
+- Current V2 contracts are Sourcify full-match verified; do not claim successful Etherscan-style API verification unless it is rerun and succeeds.
 - A live runner wrote a policy audit verdict on-chain through `recordAuditResult`.
 - Public frontend, video, proof JSON, and open-source repo are available.
 
@@ -776,7 +776,7 @@ npx hardhat verify --network mantleSepolia $env:AGENT_WALLET_ADDRESS $env:AGENT_
 Expected:
 
 - All three addresses are deployed on Mantle Sepolia.
-- Explorer pages show `Contract: Verified`.
+- Sourcify full-match verification exists for the deployed V2 contracts; Mantle explorer address pages are public.
 - AgentWallet has a small Mantle Sepolia balance after funding from the burner wallet.
 
 - [x] **Step 7: Execute a live finalized action**
@@ -1684,7 +1684,7 @@ git commit -m "chore: finalize clawguard prize submission"
 - [ ] `npm test` passes.
 - [ ] `npm run build` passes.
 - [ ] `npm run lint` passes.
-- [ ] Mantle Explorer shows `Contract: Verified` for all contracts used in the submission.
+- [ ] Sourcify full-match verification exists for all V2 contracts used in the submission.
 - [ ] Public app returns HTTP `200`.
 - [ ] Public video returns HTTP `200`.
 - [ ] Public video duration is at least `120` seconds.
