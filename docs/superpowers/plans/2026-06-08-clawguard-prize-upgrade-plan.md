@@ -322,11 +322,11 @@ Safe today:
 - A live runner wrote a policy audit verdict on-chain through `recordAuditResult`.
 - Public frontend, video, proof JSON, and open-source repo are available.
 
-Safe only after V2 evidence exists:
+Safe only after additional evidence exists:
 
 - Agent action execution is gated by a ClawGuard receipt through `AgentWallet`.
 - Agent identity is ERC-8004-aligned through an ERC-721 identity registry.
-- The audit proof includes model-backed reasoning rather than deterministic fallback.
+- The audit proof includes model-backed reasoning rather than deterministic fallback; the current V2 public proof is deterministic fallback with `model: null`.
 - The project uses Byreal Agent Skills, Byreal Perps CLI, or RealClaw core capabilities.
 
 Not claimed:
