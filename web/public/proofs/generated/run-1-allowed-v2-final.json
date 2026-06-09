@@ -1,0 +1,51 @@
+{
+  "agentId": "1",
+  "runId": "1",
+  "instruction": "Find a low-risk earning action under my policy.",
+  "policy": {
+    "maxRisk": 40,
+    "allowShell": false,
+    "allowNetwork": true
+  },
+  "toolInventory": {
+    "network": true,
+    "shell": false,
+    "filesystem": false
+  },
+  "verdict": "Allowed",
+  "riskScore": 24,
+  "rationale": "Action stays inside policy and uses declared capabilities.",
+  "engine": "deterministic-policy-engine",
+  "model": null,
+  "fallbackUsed": true,
+  "trace": [
+    {
+      "label": "Instruction risk",
+      "status": "pass",
+      "detail": "Instruction did not match high-risk wallet action terms."
+    },
+    {
+      "label": "Policy bounds",
+      "status": "pass",
+      "detail": "Risk score 24 is within max policy risk 40."
+    },
+    {
+      "label": "Tool inventory",
+      "status": "pass",
+      "detail": "Declared tools stay inside policy capability bounds."
+    },
+    {
+      "label": "Verdict mapping",
+      "status": "pass",
+      "detail": "Deterministic policy mapping produced Allowed."
+    }
+  ],
+  "timestamp": "2026-06-09T02:00:01.361Z",
+  "actionPlan": {
+    "status": "Finalized",
+    "statusValue": 2,
+    "recipient": "0x691c43F065bbf7bFA692BeE5a2D865f81028Ed3A",
+    "amountWei": "1000000000000000",
+    "actionHash": "0x9adf4e5e334b02df1f1958dbf012aed611d3f39e5841d2fd10907550dfb69e61"
+  }
+}

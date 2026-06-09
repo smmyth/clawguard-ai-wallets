@@ -2,6 +2,7 @@ import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { config as loadEnv } from "dotenv";
 import { ethers } from "ethers";
+import { buildActionPlan } from "./action.js";
 import { auditWithOptionalOpenAI, deterministicAudit, verdictToContractValue } from "./audit.js";
 import { createLedgerContract } from "./contract.js";
 import { writeProof } from "./proofs.js";
@@ -116,6 +117,23 @@ async function processRunRequested(
     );
     console.log(`Audit recorded: ${tx.hash}`);
     await tx.wait();
+
+    if (process.env.RUNNER_FINALIZE_ACTION === "true") {
+      const actionPlan = buildActionPlan({
+        verdict: result.verdict,
+        recipient: process.env.AGENT_ACTION_RECIPIENT ?? requester,
+        amountWei: process.env.AGENT_ACTION_AMOUNT_WEI ?? "1000000000000000"
+      });
+      const finalProof = await writeProof({ ...result.proof, actionPlan }, { suffix: "final" });
+      const finalTx = await contract.finalizeRun(
+        runId,
+        actionPlan.statusValue,
+        actionPlan.actionHash,
+        finalProof.publicUri
+      );
+      await finalTx.wait();
+      console.log(`Action plan recorded: ${finalTx.hash}`);
+    }
   } catch (error) {
     console.error(`Failed to process RunRequested runId=${runId}`, error);
   }

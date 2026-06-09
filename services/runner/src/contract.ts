@@ -3,6 +3,7 @@ import { ethers } from "ethers";
 export const ledgerAbi = [
   "event RunRequested(uint256 indexed runId,uint256 indexed agentId,address indexed requester,bytes32 instructionHash,string proofURI)",
   "function recordAuditResult(uint256 runId,uint8 verdict,uint8 riskScore,bytes32 auditHash,string proofURI)",
+  "function finalizeRun(uint256 runId,uint8 status,bytes32 actionHash,string finalProofURI)",
   "function getRun(uint256 runId) view returns (tuple(uint256 id,uint256 agentId,address requester,bytes32 instructionHash,string requestProofURI,uint8 verdict,uint8 riskScore,bytes32 auditHash,string auditProofURI,uint8 status,bytes32 actionHash,string finalProofURI,uint64 requestedAt,uint64 auditedAt,uint64 finalizedAt))"
 ];
 

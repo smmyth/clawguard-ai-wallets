@@ -28,11 +28,11 @@ The agent asks for a low-risk earning action. ClawGuard turns that request into 
 
 ## 0:55-1:15
 
-Show the verdict panel and receipt timeline.
+Show the verdict panel, receipt timeline, and AgentWallet panel.
 
 Narration:
 
-The policy audit verdict is Allowed with risk score 24. The rationale is deterministic and can optionally be rewritten through OpenAI when a key is configured, but the fallback is always available.
+The policy audit verdict is Allowed with risk score 24. The rationale is deterministic and can optionally be rewritten through OpenAI when a key is configured, but the fallback is always available. The AgentWallet panel shows the committed action hash and execution evidence.
 
 ## 1:15-1:35
 
@@ -40,7 +40,7 @@ Open or point to the Mantle explorer links.
 
 Narration:
 
-The public demo uses the real Mantle Sepolia ledger contract. The live run is `runId=4`, with a real request transaction and a real audit transaction.
+The public demo uses real Mantle Sepolia contracts. The live V2 run is `runId=1`, with a real request transaction, audit transaction, finalization transaction, and AgentWallet execution transaction.
 
 ## 1:35-1:50
 
@@ -48,7 +48,7 @@ Show the public proof JSON.
 
 Narration:
 
-The proof JSON records the agent, instruction, policy, capabilities, verdict, risk score, rationale, and timestamp. The ledger stores the proof URI and audit hash.
+The final proof JSON records the agent, instruction, policy, capabilities, verdict, risk score, rationale, trace, and action plan. The ledger stores the audit hash, final proof URI, and action hash that AgentWallet checks before releasing testnet value.
 
 ## 1:50-2:05
 
@@ -56,12 +56,15 @@ Close with deployment evidence.
 
 Narration:
 
-The contracts are deployed on Mantle Sepolia chain 5003 and verified on Mantle Explorer, with Sourcify full match as additional evidence. ClawGuard is not claiming production custody. It is a focused trust receipt layer for wallet agents, ready to integrate with RealClaw-style workflows.
+The contracts are deployed on Mantle Sepolia chain 5003, with Sourcify full-match verification for the V2 contracts. ClawGuard is not claiming production custody. It is a focused trust receipt and gated-execution layer for wallet agents, ready to integrate with RealClaw-style workflows.
 
 ## Links To Show
 
 - Public app: https://smmyth.github.io/clawguard-ai-wallets-demo/
-- Ledger: https://explorer.sepolia.mantle.xyz/address/0x6b349c752661Fdf085e48053E3186742b3a0D4d2
-- Request tx: https://explorer.sepolia.mantle.xyz/tx/0x856a67915f7457e9d822b9338ee6f8ea8d64838a43813d81c100ac68f044e83f
-- Audit tx: https://explorer.sepolia.mantle.xyz/tx/0x10a4bf4c55f578b254c0b1fd8b0a906cd42937cfd3f6ddd5ec179304af57adbf
-- Proof JSON: https://smmyth.github.io/clawguard-ai-wallets-demo/proofs/generated/run-4-allowed.json
+- Ledger V2: https://explorer.sepolia.mantle.xyz/address/0x572875Be3DDf633169Ff5A5162eB435ba4113e64
+- AgentWallet: https://explorer.sepolia.mantle.xyz/address/0xe29f4883FaFc657CD21F09fCc6BbF41876Eb97d0
+- Request tx: https://explorer.sepolia.mantle.xyz/tx/0x3630f0fa2a537ebb5ccb6b588af9daa5edcfceb9f579d4f1299192f8e8c295c8
+- Audit tx: https://explorer.sepolia.mantle.xyz/tx/0x93535d135b081c584c4d3d63341c7fc0a873745daa5ed3f2441d375d603fbfce
+- Finalize tx: https://explorer.sepolia.mantle.xyz/tx/0x6210b44d229110db8f1cc7067778b18647799c48deb9f1b06a828c4b92889cb9
+- Execute tx: https://explorer.sepolia.mantle.xyz/tx/0x3b8bfda7ab32cae841bba4718f8af214ce6e6bb6a83b11bf6a8132fe19b76ff5
+- Final proof JSON: https://smmyth.github.io/clawguard-ai-wallets-demo/proofs/generated/run-1-allowed-v2-final.json

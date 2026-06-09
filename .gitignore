@@ -10,4 +10,6 @@ proofs/generated/
 web/public/proofs/generated/*
 !web/public/proofs/generated/
 !web/public/proofs/generated/run-4-allowed.json
+!web/public/proofs/generated/run-1-allowed-v2.json
+!web/public/proofs/generated/run-1-allowed-v2-final.json
 *.tsbuildinfo

@@ -1,9 +1,9 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import App from "./App";
-import { requestRunOnChain, txUrl } from "./lib/contracts";
-import { contractAddresses, sampleTxs } from "./lib/demoData";
+import { addressUrl, requestRunOnChain, txUrl } from "./lib/contracts";
+import { agentExecutionConfig, contractAddresses, sampleTxs } from "./lib/demoData";
 
 vi.mock("./lib/contracts", async () => {
   const actual = await vi.importActual<typeof import("./lib/contracts")>("./lib/contracts");
@@ -15,11 +15,13 @@ vi.mock("./lib/contracts", async () => {
 });
 
 const originalLedgerAddress = contractAddresses.ledger;
+const originalExecutionConfig = { ...agentExecutionConfig };
 const requestRunOnChainMock = vi.mocked(requestRunOnChain);
 
 describe("ClawGuard app", () => {
   afterEach(() => {
     contractAddresses.ledger = originalLedgerAddress;
+    Object.assign(agentExecutionConfig, originalExecutionConfig);
     requestRunOnChainMock.mockReset();
   });
 
@@ -31,9 +33,43 @@ describe("ClawGuard app", () => {
     expect(screen.getByText("Mantle Sepolia")).toBeInTheDocument();
     expect(screen.getByText("Instruction risk")).toBeInTheDocument();
     expect(screen.getByText("Verdict mapping")).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: "run-4-allowed.json" })).toHaveAttribute(
+    const executionPanel = screen.getByRole("region", { name: "AgentWallet" });
+    expect(executionPanel).toBeInTheDocument();
+    expect(within(executionPanel).getAllByText("Not deployed").length).toBeGreaterThan(0);
+    expect(screen.getByRole("link", { name: "run-1-allowed-v2-final.json" })).toHaveAttribute(
       "href",
-      "/proofs/generated/run-4-allowed.json"
+      "/proofs/generated/run-1-allowed-v2-final.json"
+    );
+  });
+
+  it("renders the execution panel with configured replay-display links", () => {
+    const walletAddress = "0x0000000000000000000000000000000000000002";
+    const actionHash = `0x${"2".repeat(64)}`;
+
+    Object.assign(agentExecutionConfig, {
+      walletAddress,
+      actionHash,
+      executionTx: ""
+    });
+
+    render(<App />);
+
+    const panel = screen.getByRole("region", { name: "AgentWallet" });
+    expect(within(panel).getByText(walletAddress)).toBeInTheDocument();
+    expect(within(panel).getByText(actionHash)).toBeInTheDocument();
+    expect(within(panel).getAllByText("Waiting for finalized receipt")).toHaveLength(2);
+    expect(within(panel).getByRole("link", { name: /Open AgentWallet/i })).toHaveAttribute(
+      "href",
+      addressUrl(walletAddress)
+    );
+  });
+
+  it("keeps the public V2 final proof link visible", () => {
+    render(<App />);
+
+    expect(screen.getByRole("link", { name: "run-1-allowed-v2-final.json" })).toHaveAttribute(
+      "href",
+      "/proofs/generated/run-1-allowed-v2-final.json"
     );
   });
 
@@ -99,5 +135,24 @@ describe("ClawGuard app", () => {
     expect(hrefs).toContain(txUrl(walletRequestTx));
     expect(hrefs).not.toContain(txUrl(sampleTxs.audit));
     expect(screen.queryByRole("heading", { name: "Allowed" })).not.toBeInTheDocument();
+  });
+
+  it("does not fall back to replay txs when wallet mode is missing ledger config", async () => {
+    contractAddresses.ledger = "";
+    render(<App />);
+    const user = userEvent.setup();
+
+    await user.click(screen.getByRole("button", { name: "Wallet mode" }));
+    await user.click(screen.getByRole("button", { name: /Run trust check/i }));
+
+    expect(requestRunOnChainMock).not.toHaveBeenCalled();
+    expect(await screen.findByRole("alert")).toHaveTextContent(
+      "Wallet mode needs VITE_AGENT_RUN_LEDGER_ADDRESS before it can submit on-chain."
+    );
+    expect(screen.getByText("Audit tx pending")).toBeInTheDocument();
+
+    const hrefs = Array.from(document.querySelectorAll("a")).map((link) => link.getAttribute("href"));
+    expect(hrefs).not.toContain(txUrl(sampleTxs.request));
+    expect(hrefs).not.toContain(txUrl(sampleTxs.audit));
   });
 });

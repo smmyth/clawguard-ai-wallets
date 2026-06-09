@@ -26,6 +26,12 @@ export const contractAddresses = {
   ledger: import.meta.env.VITE_AGENT_RUN_LEDGER_ADDRESS ?? ""
 };
 
+export const agentExecutionConfig = {
+  walletAddress: import.meta.env.VITE_AGENT_WALLET_ADDRESS ?? "",
+  actionHash: import.meta.env.VITE_AGENT_ACTION_HASH ?? "",
+  executionTx: import.meta.env.VITE_AGENT_EXECUTION_TX ?? ""
+};
+
 export const demoPolicy: AgentPolicy = {
   maxRisk: 40,
   allowShell: false,
@@ -137,8 +143,8 @@ export const replayAuditProofJson = {
 };
 
 export const sampleTxs = {
-  request: "0x856a67915f7457e9d822b9338ee6f8ea8d64838a43813d81c100ac68f044e83f",
-  audit: "0x10a4bf4c55f578b254c0b1fd8b0a906cd42937cfd3f6ddd5ec179304af57adbf"
+  request: "0x3630f0fa2a537ebb5ccb6b588af9daa5edcfceb9f579d4f1299192f8e8c295c8",
+  audit: "0x93535d135b081c584c4d3d63341c7fc0a873745daa5ed3f2441d375d603fbfce"
 };
 
 export const verdictCopy: Record<Exclude<Verdict, "idle" | "requesting" | "auditing">, {
@@ -183,6 +189,15 @@ export function makeTimeline(status: Verdict): ReceiptStep[] {
     return [
       { label: "Request", description: "No run requested yet", status: "waiting" },
       { label: "Audit", description: "Waiting for AI policy check", status: "waiting" },
+      { label: "Receipt", description: "No receipt written", status: "waiting" },
+      { label: "Explorer", description: "No transaction available", status: "waiting" }
+    ];
+  }
+
+  if (status === "error") {
+    return [
+      { label: "Request", description: "No on-chain request confirmed", status: "error" },
+      { label: "Audit", description: "Audit not started", status: "waiting" },
       { label: "Receipt", description: "No receipt written", status: "waiting" },
       { label: "Explorer", description: "No transaction available", status: "waiting" }
     ];

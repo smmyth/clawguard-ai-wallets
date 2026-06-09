@@ -611,7 +611,7 @@ Execution note: Task 2 was implemented and then tightened after review. The publ
 - Create: `web\src\components\ExecutionPanel.tsx`
 - Modify: `web\src\lib\contracts.ts`
 
-- [ ] **Step 1: Add action planning tests**
+- [x] **Step 1: Add action planning tests**
 
 Create `services\runner\src\action.test.ts`:
 
@@ -652,7 +652,7 @@ it("cancels non-Allowed verdicts", () => {
 });
 ```
 
-- [ ] **Step 2: Implement action planner**
+- [x] **Step 2: Implement action planner**
 
 Create `services\runner\src\action.ts`:
 
@@ -702,7 +702,7 @@ export function buildActionPlan(input: {
 }
 ```
 
-- [ ] **Step 3: Extend contract ABI**
+- [x] **Step 3: Extend contract ABI**
 
 In `services\runner\src\contract.ts`, add:
 
@@ -710,7 +710,7 @@ In `services\runner\src\contract.ts`, add:
 "function finalizeRun(uint256 runId,uint8 status,bytes32 actionHash,string proofURI)"
 ```
 
-- [ ] **Step 4: Finalize after audit when enabled**
+- [x] **Step 4: Finalize after audit when enabled**
 
 In `services\runner\src\index.ts`, after `recordAuditResult` and `await tx.wait()`, add:
 
@@ -737,7 +737,7 @@ if (process.env.RUNNER_FINALIZE_ACTION === "true") {
 }
 ```
 
-- [ ] **Step 5: Deploy V2 stack**
+- [x] **Step 5: Deploy V2 stack**
 
 Create `contracts\scripts\deploy-v2.ts` that deploys:
 
@@ -759,7 +759,7 @@ console.log(`AgentRunLedgerV2: ${await ledger.getAddress()}`);
 console.log(`AgentWallet: ${await wallet.getAddress()}`);
 ```
 
-- [ ] **Step 6: Verify and fund AgentWallet**
+- [x] **Step 6: Verify and fund AgentWallet**
 
 Run:
 
@@ -779,7 +779,7 @@ Expected:
 - Explorer pages show `Contract: Verified`.
 - AgentWallet has a small Mantle Sepolia balance after funding from the burner wallet.
 
-- [ ] **Step 7: Execute a live finalized action**
+- [x] **Step 7: Execute a live finalized action**
 
 Run runner with:
 
@@ -799,7 +799,7 @@ Expected live evidence:
 - `RunFinalized` tx.
 - `ActionExecuted` tx.
 
-- [ ] **Step 8: Add frontend execution panel**
+- [x] **Step 8: Add frontend execution panel**
 
 Create `web\src\components\ExecutionPanel.tsx`:
 
@@ -844,14 +844,9 @@ export function ExecutionPanel({ walletAddress, actionHash, executionTx, disable
 }
 ```
 
-- [ ] **Step 9: Commit**
+- [x] **Step 9: Commit**
 
-Run:
-
-```powershell
-git add contracts services/runner web/src
-git commit -m "feat: gate wallet execution with finalized receipts"
-```
+Execution note: Task 3 deployed `AgentRegistry=0x6245caE82a9Cb257Ae3c7a70D633c1b35E071464`, `AgentRunLedgerV2=0x572875Be3DDf633169Ff5A5162eB435ba4113e64`, and `AgentWallet=0xe29f4883FaFc657CD21F09fCc6BbF41876Eb97d0` on Mantle Sepolia. Live V2 evidence: request `0x3630f0fa2a537ebb5ccb6b588af9daa5edcfceb9f579d4f1299192f8e8c295c8`, audit `0x93535d135b081c584c4d3d63341c7fc0a873745daa5ed3f2441d375d603fbfce`, finalize `0x6210b44d229110db8f1cc7067778b18647799c48deb9f1b06a828c4b92889cb9`, execution `0x3b8bfda7ab32cae841bba4718f8af214ce6e6bb6a83b11bf6a8132fe19b76ff5`, action hash `0x9adf4e5e334b02df1f1958dbf012aed611d3f39e5841d2fd10907550dfb69e61`, final proof `/proofs/generated/run-1-allowed-v2-final.json`. Sourcify full-match verification passed for all three V2 contracts; the Mantle explorer Etherscan-style API returned HTML instead of JSON during Hardhat verification, so do not claim successful Etherscan-style API verification for V2.
 
 ---
 

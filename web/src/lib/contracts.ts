@@ -29,6 +29,11 @@ export function addressUrl(address?: string) {
   return `${explorerBaseUrl}/address/${address}`;
 }
 
+export function executionExplorerUrl({ walletAddress, executionTx }: { walletAddress?: string; executionTx?: string }) {
+  if (executionTx) return txUrl(executionTx);
+  return addressUrl(walletAddress);
+}
+
 export async function requestRunOnChain(instruction: string) {
   if (!window.ethereum) {
     throw new Error("No injected wallet found.");

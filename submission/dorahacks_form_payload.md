@@ -10,7 +10,7 @@ ClawGuard turns AI wallet decisions into Mantle Sepolia trust receipts: policy i
 
 ## Project Description
 
-ClawGuard is a trust receipt layer for AI wallet agents. A Personal CFO-style agent submits an instruction, an audit runner checks it against a declared policy and tool inventory, and `AgentRunLedger` records the policy audit result on Mantle Sepolia. The public demo shows the full receipt path: policy, instruction, policy audit verdict, risk score, proof JSON, and explorer links.
+ClawGuard is a trust receipt layer for AI wallet agents. A Personal CFO-style agent submits an instruction, an audit runner checks it against a declared policy and tool inventory, `AgentRunLedgerV2` records the policy audit result on Mantle Sepolia, and `AgentWallet` only releases testnet value after the finalized receipt commits to the exact recipient and amount. The public demo shows the full receipt path: policy, instruction, policy audit verdict, risk score, final proof JSON, explorer links, and gated execution evidence.
 
 ## Public Demo
 
@@ -30,15 +30,20 @@ https://smmyth.github.io/clawguard-ai-wallets-demo/submission/clawguard-demo.web
 
 ## Deployed Contracts
 
-- AgentRegistry: `0x12c186925ab7f8ad88a322ee057E4A68e22c88A8`
-- AgentRunLedger: `0x6b349c752661Fdf085e48053E3186742b3a0D4d2`
+- AgentRegistry: `0x6245caE82a9Cb257Ae3c7a70D633c1b35E071464`
+- AgentRunLedgerV2: `0x572875Be3DDf633169Ff5A5162eB435ba4113e64`
+- AgentWallet: `0xe29f4883FaFc657CD21F09fCc6BbF41876Eb97d0`
 
 ## Mantle Explorer Links
 
-- Registry: https://explorer.sepolia.mantle.xyz/address/0x12c186925ab7f8ad88a322ee057E4A68e22c88A8
-- Ledger: https://explorer.sepolia.mantle.xyz/address/0x6b349c752661Fdf085e48053E3186742b3a0D4d2
-- Live request tx: https://explorer.sepolia.mantle.xyz/tx/0x856a67915f7457e9d822b9338ee6f8ea8d64838a43813d81c100ac68f044e83f
-- Live audit tx: https://explorer.sepolia.mantle.xyz/tx/0x10a4bf4c55f578b254c0b1fd8b0a906cd42937cfd3f6ddd5ec179304af57adbf
+- Registry: https://explorer.sepolia.mantle.xyz/address/0x6245caE82a9Cb257Ae3c7a70D633c1b35E071464
+- Ledger V2: https://explorer.sepolia.mantle.xyz/address/0x572875Be3DDf633169Ff5A5162eB435ba4113e64
+- AgentWallet: https://explorer.sepolia.mantle.xyz/address/0xe29f4883FaFc657CD21F09fCc6BbF41876Eb97d0
+- Live request tx: https://explorer.sepolia.mantle.xyz/tx/0x3630f0fa2a537ebb5ccb6b588af9daa5edcfceb9f579d4f1299192f8e8c295c8
+- Live audit tx: https://explorer.sepolia.mantle.xyz/tx/0x93535d135b081c584c4d3d63341c7fc0a873745daa5ed3f2441d375d603fbfce
+- Live finalize tx: https://explorer.sepolia.mantle.xyz/tx/0x6210b44d229110db8f1cc7067778b18647799c48deb9f1b06a828c4b92889cb9
+- Live execution tx: https://explorer.sepolia.mantle.xyz/tx/0x3b8bfda7ab32cae841bba4718f8af214ce6e6bb6a83b11bf6a8132fe19b76ff5
+- Public final proof: https://smmyth.github.io/clawguard-ai-wallets-demo/proofs/generated/run-1-allowed-v2-final.json
 
 ## Prize Selection
 

@@ -508,6 +508,65 @@ textarea:focus {
   gap: 20px;
 }
 
+.execution-panel {
+  display: grid;
+  gap: 18px;
+  padding: 22px;
+}
+
+.execution-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.execution-fact {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 10px;
+  min-width: 0;
+  min-height: 88px;
+  padding: 14px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #0b1214;
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.execution-fact.link {
+  grid-template-columns: 1fr;
+  border-color: rgba(73, 216, 255, 0.22);
+  background: rgba(73, 216, 255, 0.06);
+}
+
+.execution-fact svg {
+  color: var(--cyan);
+}
+
+.execution-fact span {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.execution-fact strong {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  overflow-wrap: anywhere;
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.35;
+}
+
+.execution-fact.link strong {
+  color: var(--cyan);
+}
+
 .timeline {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -540,6 +599,11 @@ textarea:focus {
 .timeline-step.active .timeline-dot {
   background: var(--cyan);
   box-shadow: 0 0 24px rgba(73, 216, 255, 0.5);
+}
+
+.timeline-step.error .timeline-dot {
+  background: var(--red);
+  box-shadow: 0 0 24px rgba(255, 110, 110, 0.42);
 }
 
 .timeline-step strong {
@@ -695,6 +759,7 @@ textarea:focus {
   .hero-grid,
   .timeline,
   .trace-list,
+  .execution-grid,
   .link-grid,
   .receipt-strip,
   .engine-row {

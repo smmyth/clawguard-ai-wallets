@@ -3,6 +3,7 @@ import { Bot, CircleAlert, CirclePlay, RadioTower, ReceiptText, RotateCcw, Shiel
 import { AgentPolicyCard } from "./components/AgentPolicyCard";
 import { AiTracePanel } from "./components/AiTracePanel";
 import { AiVerdictPanel } from "./components/AiVerdictPanel";
+import { ExecutionPanel } from "./components/ExecutionPanel";
 import { RunTimeline } from "./components/RunTimeline";
 import { Verdict, contractAddresses, demoInstruction, explorerBaseUrl, makeReplayAuditProof, sampleTxs } from "./lib/demoData";
 import { requestRunOnChain } from "./lib/contracts";
@@ -19,7 +20,7 @@ export default function App() {
 
   const canUseWallet = Boolean(contractAddresses.ledger);
   const assetBase = import.meta.env.BASE_URL;
-  const liveProofPath = "proofs/generated/run-4-allowed.json";
+  const liveProofPath = "proofs/generated/run-1-allowed-v2-final.json";
   const replayProof = useMemo(() => makeReplayAuditProof(instruction), [instruction]);
   const hasCompletedVerdict = status === "allowed" || status === "warning" || status === "blocked";
   const replayRiskScore = mode === "replay" && hasCompletedVerdict ? replayProof.riskScore : undefined;
@@ -40,7 +41,13 @@ export default function App() {
     setAuditTx(undefined);
     setStatus("requesting");
 
-    if (mode === "wallet" && canUseWallet) {
+    if (mode === "wallet") {
+      if (!canUseWallet) {
+        setStatus("error");
+        setError("Wallet mode needs VITE_AGENT_RUN_LEDGER_ADDRESS before it can submit on-chain.");
+        return;
+      }
+
       try {
         const receipt = await requestRunOnChain(instruction);
         setRequestTx(receipt?.hash);
@@ -177,6 +184,8 @@ export default function App() {
 
         <RunTimeline status={status} requestTx={requestTx} auditTx={auditTx} useSampleTxs={mode === "replay"} />
 
+        <ExecutionPanel />
+
         <section className="receipt-strip" aria-label="Submission readiness">
           <div>
             <strong>Explorer base</strong>
@@ -193,7 +202,7 @@ export default function App() {
           <div>
             <strong>Live proof</strong>
             <a href={`${assetBase}${liveProofPath}`} target="_blank" rel="noreferrer">
-              run-4-allowed.json
+              run-1-allowed-v2-final.json
             </a>
           </div>
         </section>

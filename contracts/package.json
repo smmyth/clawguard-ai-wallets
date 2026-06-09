@@ -6,6 +6,7 @@
     "build": "hardhat compile",
     "test": "hardhat test",
     "deploy:mantle": "hardhat run scripts/deploy.ts --network mantleSepolia",
+    "deploy:v2:mantle": "hardhat run scripts/deploy-v2.ts --network mantleSepolia",
     "verify:mantle": "hardhat run scripts/verify.ts --network mantleSepolia"
   },
   "dependencies": {

@@ -1,6 +1,6 @@
 # ClawGuard
 
-ClawGuard is a Mantle Sepolia trust receipt layer for AI wallet agents. It records an agent policy, an instruction hash, a policy audit verdict, and a proof URI so users can inspect what an autonomous wallet agent was allowed to do and where the evidence lives on-chain.
+ClawGuard is a Mantle Sepolia trust receipt layer for AI wallet agents. It records an agent policy, an instruction hash, a policy audit verdict, and a proof URI, then uses a finalized receipt to gate a small testnet transfer from `AgentWallet`.
 
 ## Public Demo
 
@@ -18,45 +18,51 @@ ClawGuard is a Mantle Sepolia trust receipt layer for AI wallet agents. It recor
 - Deployer / burner: `0x691c43F065bbf7bFA692BeE5a2D865f81028Ed3A`
 - Faucet tx: https://explorer.sepolia.mantle.xyz/tx/0x4b529efac6b8ff6f39b7fc469ca8994f29834de9b8323cbf144df845b41b8d90
 
-Contracts:
+Current V2 contracts:
 
-- `AgentRegistry`: `0x12c186925ab7f8ad88a322ee057E4A68e22c88A8`
-- Registry explorer: https://explorer.sepolia.mantle.xyz/address/0x12c186925ab7f8ad88a322ee057E4A68e22c88A8
-- Registry Sourcify full match: https://repo.sourcify.dev/contracts/full_match/5003/0x12c186925ab7f8ad88a322ee057E4A68e22c88A8/
-- `AgentRunLedger`: `0x6b349c752661Fdf085e48053E3186742b3a0D4d2`
-- Ledger explorer: https://explorer.sepolia.mantle.xyz/address/0x6b349c752661Fdf085e48053E3186742b3a0D4d2
-- Ledger Sourcify full match: https://repo.sourcify.dev/contracts/full_match/5003/0x6b349c752661Fdf085e48053E3186742b3a0D4d2/
+- `AgentRegistry`: `0x6245caE82a9Cb257Ae3c7a70D633c1b35E071464`
+- Registry explorer: https://explorer.sepolia.mantle.xyz/address/0x6245caE82a9Cb257Ae3c7a70D633c1b35E071464
+- Registry Sourcify full match: https://repo.sourcify.dev/contracts/full_match/5003/0x6245caE82a9Cb257Ae3c7a70D633c1b35E071464/
+- `AgentRunLedgerV2`: `0x572875Be3DDf633169Ff5A5162eB435ba4113e64`
+- Ledger explorer: https://explorer.sepolia.mantle.xyz/address/0x572875Be3DDf633169Ff5A5162eB435ba4113e64
+- Ledger Sourcify full match: https://repo.sourcify.dev/contracts/full_match/5003/0x572875Be3DDf633169Ff5A5162eB435ba4113e64/
+- `AgentWallet`: `0xe29f4883FaFc657CD21F09fCc6BbF41876Eb97d0`
+- Wallet explorer: https://explorer.sepolia.mantle.xyz/address/0xe29f4883FaFc657CD21F09fCc6BbF41876Eb97d0
+- Wallet Sourcify full match: https://repo.sourcify.dev/contracts/full_match/5003/0xe29f4883FaFc657CD21F09fCc6BbF41876Eb97d0/
 
-Live receipt proof:
+Live V2 gated execution proof:
 
-- `agentId`: `3`
-- `runId`: `4`
-- Register tx: https://explorer.sepolia.mantle.xyz/tx/0x36f5dbc6aa5e19119b223a2d5a2bb1890a1ad7204aeeb4d5b2d8902db32c9c30
-- Request tx: https://explorer.sepolia.mantle.xyz/tx/0x856a67915f7457e9d822b9338ee6f8ea8d64838a43813d81c100ac68f044e83f
-- Request block: `39710840`
-- Audit tx: https://explorer.sepolia.mantle.xyz/tx/0x10a4bf4c55f578b254c0b1fd8b0a906cd42937cfd3f6ddd5ec179304af57adbf
-- Audit block: `39710846`
-- On-chain status: `1` (`Audited`)
+- `agentId`: `1`
+- `runId`: `1`
+- AgentWallet funding tx: https://explorer.sepolia.mantle.xyz/tx/0xd5e17f814d1edeb54c5965073e3746361bc856a5ed90664f7a76917bb5025713
+- Request tx: https://explorer.sepolia.mantle.xyz/tx/0x3630f0fa2a537ebb5ccb6b588af9daa5edcfceb9f579d4f1299192f8e8c295c8
+- Audit tx: https://explorer.sepolia.mantle.xyz/tx/0x93535d135b081c584c4d3d63341c7fc0a873745daa5ed3f2441d375d603fbfce
+- Finalize tx: https://explorer.sepolia.mantle.xyz/tx/0x6210b44d229110db8f1cc7067778b18647799c48deb9f1b06a828c4b92889cb9
+- Execute tx: https://explorer.sepolia.mantle.xyz/tx/0x3b8bfda7ab32cae841bba4718f8af214ce6e6bb6a83b11bf6a8132fe19b76ff5
+- On-chain status: `2` (`Finalized`)
 - On-chain verdict: `1` (`Allowed`)
 - Risk score: `24`
-- Proof URI: `/proofs/generated/run-4-allowed.json`
-- Proof hash: `0x1d8c356529b185fa064176dedfe393ae007f7d17197067bfddb77d5cdefecfd3`
-- Public proof JSON: https://smmyth.github.io/clawguard-ai-wallets-demo/proofs/generated/run-4-allowed.json
+- Action hash: `0x9adf4e5e334b02df1f1958dbf012aed611d3f39e5841d2fd10907550dfb69e61`
+- Audit proof URI: `/proofs/generated/run-1-allowed-v2.json`
+- Audit proof hash: `0x8ef4c30ba89b0971233615dbc6188171f4e905eb7a99aff425c6eeb4704604a7`
+- Final proof URI: `/proofs/generated/run-1-allowed-v2-final.json`
+- Final proof hash: `0x1e785ac40c8eb575fdba871ec7602c8ef983a643ef72b644a1aa2e3c3883212b`
+- Public final proof JSON: https://smmyth.github.io/clawguard-ai-wallets-demo/proofs/generated/run-1-allowed-v2-final.json
 
-Note: both contracts are visible as verified contracts on the Mantle Sepolia explorer, and both also have Sourcify full-match verification for chain `5003`.
+Verification note: the three V2 contracts are Sourcify full-match verified for chain `5003`. The Mantle explorer address pages are publicly accessible, but the Etherscan-style verification API returned HTML instead of JSON during Hardhat verification, so this README does not claim successful Etherscan-style API verification for V2.
 
 ## Claim Matrix
 
 Safe today:
 
 - Deployed on Mantle Sepolia chain `5003`.
-- Contracts are verified on Mantle Explorer and Sourcify full-match verified.
+- V2 contracts are Sourcify full-match verified.
 - A live runner wrote a policy audit verdict on-chain through `recordAuditResult`.
+- A finalized ClawGuard receipt gated a live AgentWallet testnet transfer through `executeAction`.
 - Public frontend, video, proof JSON, and open-source repo are available.
 
 Safe only after V2 evidence exists:
 
-- Agent action execution is gated by a ClawGuard receipt through `AgentWallet`.
 - Agent identity is ERC-8004-aligned through an ERC-721 identity registry.
 - The audit proof includes model-backed reasoning rather than deterministic fallback.
 - The project uses Byreal Agent Skills, Byreal Perps CLI, or RealClaw core capabilities.
@@ -73,19 +79,20 @@ Not claimed:
 ```mermaid
 flowchart LR
   U["User"] --> W["ClawGuard Web"]
-  W --> L["AgentRunLedger"]
+  W --> L["AgentRunLedgerV2"]
   L --> R["Runner"]
   R --> A["Policy Audit"]
   A --> P["Proof JSON"]
   R --> L
-  L --> E["Mantle Explorer"]
+  L --> G["AgentWallet"]
+  G --> E["Mantle Explorer"]
 ```
 
 ## Packages
 
-- `contracts`: Hardhat, `AgentRegistry`, `AgentRunLedger`, tests, deployment and verification scripts.
-- `services/runner`: event polling listener, deterministic audit, optional OpenAI rationale, proof writer.
-- `web`: React/Vite app with replay mode, wallet mode, policy panel, verdict panel, receipt timeline, and explorer links.
+- `contracts`: Hardhat, `AgentRegistry`, `AgentRunLedger`, `AgentWallet`, tests, deployment and verification scripts.
+- `services/runner`: event polling listener, deterministic audit, optional OpenAI rationale, action planner, proof writer.
+- `web`: React/Vite app with replay mode, wallet mode, policy panel, verdict panel, audit trace, receipt timeline, AgentWallet panel, and explorer links.
 - `submission`: pitch pack, demo script, and generated demo video.
 - `docs`: deployment evidence and operational notes.
 
@@ -126,6 +133,12 @@ Copy `.env.example` to `.env` and set:
 - `PRIVATE_KEY`
 - `AGENT_REGISTRY_ADDRESS`
 - `AGENT_RUN_LEDGER_ADDRESS`
+- optional `RUNNER_FINALIZE_ACTION=true`
+- optional `AGENT_ACTION_RECIPIENT`
+- optional `AGENT_ACTION_AMOUNT_WEI`
+- optional `VITE_AGENT_WALLET_ADDRESS`
+- optional `VITE_AGENT_ACTION_HASH`
+- optional `VITE_AGENT_EXECUTION_TX`
 - optional `OPENAI_API_KEY`
 
 Do not commit `.env`. The repository uses a local burner key only for testnet deployment and demo transactions.
@@ -136,8 +149,8 @@ Safe claims:
 
 - "ClawGuard demonstrates a trust receipt layer for RealClaw-style AI wallet agents."
 - "Contracts are deployed on Mantle Sepolia."
-- "Contract source is verified on Mantle Explorer and Sourcify with full match for chain `5003`."
-- "A live `RunRequested` event was audited by the runner and recorded through `RunAudited`."
+- "V2 contract source is Sourcify full-match verified for chain `5003`."
+- "A live `RunRequested` event was audited by the runner, finalized, and executed through AgentWallet."
 - "The public frontend links to the Mantle receipt and proof JSON."
 
 Do not claim:
