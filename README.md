@@ -1,11 +1,12 @@
 # ClawGuard
 
-ClawGuard is a Mantle Sepolia trust receipt layer for AI wallet agents. It records an agent policy, an instruction hash, an AI audit verdict, and a proof URI so users can inspect what an autonomous wallet agent was allowed to do and where the evidence lives on-chain.
+ClawGuard is a Mantle Sepolia trust receipt layer for AI wallet agents. It records an agent policy, an instruction hash, a policy audit verdict, and a proof URI so users can inspect what an autonomous wallet agent was allowed to do and where the evidence lives on-chain.
 
 ## Public Demo
 
 - Frontend: https://smmyth.github.io/clawguard-ai-wallets-demo/
-- Public repo for the deployed static build: https://github.com/smmyth/clawguard-ai-wallets-demo
+- Source repo: https://github.com/smmyth/clawguard-ai-wallets
+- Deployed static build repo: https://github.com/smmyth/clawguard-ai-wallets-demo
 - Demo video: `submission/clawguard-demo.webm`
 - Demo video duration: 127.48 seconds
 
@@ -29,17 +30,43 @@ Contracts:
 Live receipt proof:
 
 - `agentId`: `3`
-- `runId`: `3`
+- `runId`: `4`
 - Register tx: https://explorer.sepolia.mantle.xyz/tx/0x36f5dbc6aa5e19119b223a2d5a2bb1890a1ad7204aeeb4d5b2d8902db32c9c30
-- Request tx: https://explorer.sepolia.mantle.xyz/tx/0x1c0ea9e90c9910152b6815a3e9e79b82fef29cf939ea80a020c24fe30fe26118
-- Audit tx: https://explorer.sepolia.mantle.xyz/tx/0x8888ee04c7d527982390b5b6237c4ccf3dd6b1d26a28de28cf4b356291be35d4
+- Request tx: https://explorer.sepolia.mantle.xyz/tx/0x856a67915f7457e9d822b9338ee6f8ea8d64838a43813d81c100ac68f044e83f
+- Request block: `39710840`
+- Audit tx: https://explorer.sepolia.mantle.xyz/tx/0x10a4bf4c55f578b254c0b1fd8b0a906cd42937cfd3f6ddd5ec179304af57adbf
+- Audit block: `39710846`
 - On-chain status: `1` (`Audited`)
 - On-chain verdict: `1` (`Allowed`)
 - Risk score: `24`
-- Proof URI: `/proofs/generated/run-3-allowed.json`
-- Public proof JSON: https://smmyth.github.io/clawguard-ai-wallets-demo/proofs/generated/run-3-allowed.json
+- Proof URI: `/proofs/generated/run-4-allowed.json`
+- Proof hash: `0x1d8c356529b185fa064176dedfe393ae007f7d17197067bfddb77d5cdefecfd3`
+- Public proof JSON: https://smmyth.github.io/clawguard-ai-wallets-demo/proofs/generated/run-4-allowed.json
 
 Note: both contracts are visible as verified contracts on the Mantle Sepolia explorer, and both also have Sourcify full-match verification for chain `5003`.
+
+## Claim Matrix
+
+Safe today:
+
+- Deployed on Mantle Sepolia chain `5003`.
+- Contracts are verified on Mantle Explorer and Sourcify full-match verified.
+- A live runner wrote a policy audit verdict on-chain through `recordAuditResult`.
+- Public frontend, video, proof JSON, and open-source repo are available.
+
+Safe only after V2 evidence exists:
+
+- Agent action execution is gated by a ClawGuard receipt through `AgentWallet`.
+- Agent identity is ERC-8004-aligned through an ERC-721 identity registry.
+- The audit proof includes model-backed reasoning rather than deterministic fallback.
+- The project uses Byreal Agent Skills, Byreal Perps CLI, or RealClaw core capabilities.
+
+Not claimed:
+
+- Mainnet custody.
+- Production Byreal or RealClaw integration before evidence exists.
+- RWA functionality.
+- Alpha/Data track fit based on Mantle on-chain data as a core source.
 
 ## Architecture
 
@@ -48,7 +75,7 @@ flowchart LR
   U["User"] --> W["ClawGuard Web"]
   W --> L["AgentRunLedger"]
   L --> R["Runner"]
-  R --> A["Policy + AI Audit"]
+  R --> A["Policy Audit"]
   A --> P["Proof JSON"]
   R --> L
   L --> E["Mantle Explorer"]

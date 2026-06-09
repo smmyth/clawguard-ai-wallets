@@ -6,13 +6,15 @@ type Props = {
   status: Verdict;
   requestTx?: string;
   auditTx?: string;
+  useSampleTxs?: boolean;
 };
 
-export function RunTimeline({ status, requestTx, auditTx }: Props) {
+export function RunTimeline({ status, requestTx, auditTx, useSampleTxs = false }: Props) {
   const timeline = makeTimeline(status);
   const done = status === "allowed" || status === "warning" || status === "blocked";
-  const requestHash = requestTx ?? (done ? sampleTxs.request : undefined);
-  const auditHash = auditTx ?? (done ? sampleTxs.audit : undefined);
+  const useReplayFallback = useSampleTxs && done;
+  const requestHash = requestTx ?? (useReplayFallback ? sampleTxs.request : undefined);
+  const auditHash = auditTx ?? (useReplayFallback ? sampleTxs.audit : undefined);
 
   return (
     <section className="panel timeline-panel" aria-labelledby="timeline-title">

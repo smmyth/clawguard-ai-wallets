@@ -36,7 +36,7 @@ describe("AgentRunLedger", function () {
     expect(run.status).to.equal(0n);
   });
 
-  it("lets authorized auditors record exactly one AI verdict", async function () {
+  it("lets authorized auditors record exactly one policy audit verdict", async function () {
     const { ledger, requester, auditor, other } = await deployFixture();
     await ledger.connect(requester).requestRun(1, instructionHash, "proofs/request-1.json");
 

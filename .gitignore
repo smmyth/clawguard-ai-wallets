@@ -7,5 +7,7 @@ typechain-types/
 .env
 .env.local
 proofs/generated/
-web/public/proofs/generated/
+web/public/proofs/generated/*
+!web/public/proofs/generated/
+!web/public/proofs/generated/run-4-allowed.json
 *.tsbuildinfo

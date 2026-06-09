@@ -1,6 +1,6 @@
 {
-  "agentId": "1",
-  "runId": "1",
+  "agentId": "3",
+  "runId": "4",
   "instruction": "Find a low-risk earning action under my policy.",
   "policy": {
     "maxRisk": 40,
@@ -40,5 +40,5 @@
       "detail": "Deterministic policy mapping produced Allowed."
     }
   ],
-  "timestamp": "2026-06-08T00:00:00.000Z"
+  "timestamp": "2026-06-09T00:52:36.845Z"
 }

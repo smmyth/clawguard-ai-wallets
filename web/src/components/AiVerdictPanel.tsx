@@ -4,19 +4,21 @@ import { Verdict, verdictCopy } from "../lib/demoData";
 
 type Props = {
   status: Verdict;
+  riskScore?: number;
 };
 
-export function AiVerdictPanel({ status }: Props) {
+export function AiVerdictPanel({ status, riskScore }: Props) {
   const visibleStatus = status === "idle" || status === "requesting" || status === "auditing" ? "allowed" : status;
   const copy = verdictCopy[visibleStatus];
   const Icon = copy.icon;
   const pending = status === "idle" || status === "requesting" || status === "auditing";
+  const visibleRiskScore = pending ? 0 : (riskScore ?? copy.riskScore);
 
   return (
     <section className={`panel verdict-panel ${pending ? "pending" : visibleStatus}`} aria-labelledby="verdict-title">
       <div className="panel-heading">
         <div>
-          <p className="section-label">AI verdict</p>
+          <p className="section-label">Policy audit verdict</p>
           <h2 id="verdict-title">{pending ? "Waiting for trust check" : copy.label}</h2>
         </div>
         <div className="verdict-icon">
@@ -24,9 +26,9 @@ export function AiVerdictPanel({ status }: Props) {
         </div>
       </div>
 
-      <div className="risk-gauge" aria-label={`Risk score ${pending ? 0 : copy.riskScore}`}>
-        <div className="risk-ring" style={{ "--score": pending ? 0 : copy.riskScore } as CSSProperties}>
-          <span>{pending ? "--" : copy.riskScore}</span>
+      <div className="risk-gauge" aria-label={`Risk score ${visibleRiskScore}`}>
+        <div className="risk-ring" style={{ "--score": visibleRiskScore } as CSSProperties}>
+          <span>{pending ? "--" : visibleRiskScore}</span>
         </div>
         <div>
           <div className="risk-label">

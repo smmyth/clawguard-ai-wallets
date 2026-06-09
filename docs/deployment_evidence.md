@@ -35,24 +35,25 @@ Date: 2026-06-08
 ## Live Runner Receipt
 
 - `agentId`: `3`
-- `runId`: `3`
+- `runId`: `4`
 - Register tx: `0x36f5dbc6aa5e19119b223a2d5a2bb1890a1ad7204aeeb4d5b2d8902db32c9c30`
-- Request tx: `0x1c0ea9e90c9910152b6815a3e9e79b82fef29cf939ea80a020c24fe30fe26118`
-- Audit tx: `0x8888ee04c7d527982390b5b6237c4ccf3dd6b1d26a28de28cf4b356291be35d4`
-- Audit tx block: `39703513`
+- Request tx: `0x856a67915f7457e9d822b9338ee6f8ea8d64838a43813d81c100ac68f044e83f`
+- Request tx block: `39710840`
+- Audit tx: `0x10a4bf4c55f578b254c0b1fd8b0a906cd42937cfd3f6ddd5ec179304af57adbf`
+- Audit tx block: `39710846`
 - Ledger status: `1` (`Audited`)
 - Verdict: `1` (`Allowed`)
 - Risk score: `24`
-- Audit proof hash: `0xe43a2bd16dead1dddf3c64dfbd4e136ea94085d29bd27bb43a712a54f1db1644`
-- Audit proof URI: `/proofs/generated/run-3-allowed.json`
-- Public proof: https://smmyth.github.io/clawguard-ai-wallets-demo/proofs/generated/run-3-allowed.json
+- Audit proof hash: `0x1d8c356529b185fa064176dedfe393ae007f7d17197067bfddb77d5cdefecfd3`
+- Audit proof URI: `/proofs/generated/run-4-allowed.json`
+- Public proof: https://smmyth.github.io/clawguard-ai-wallets-demo/proofs/generated/run-4-allowed.json
 
 Runner stdout from the clean run:
 
 ```text
-Watching AgentRunLedger from block 39703496 with getLogs polling...
-RunRequested runId=3 agentId=3 requester=0x691c43F065bbf7bFA692BeE5a2D865f81028Ed3A
-Audit recorded: 0x8888ee04c7d527982390b5b6237c4ccf3dd6b1d26a28de28cf4b356291be35d4
+Watching AgentRunLedger from block 39710840 with getLogs polling...
+RunRequested runId=4 agentId=3 requester=0x691c43F065bbf7bFA692BeE5a2D865f81028Ed3A
+Audit recorded: 0x10a4bf4c55f578b254c0b1fd8b0a906cd42937cfd3f6ddd5ec179304af57adbf
 ```
 
 Runner stderr from the clean run was empty.
@@ -60,7 +61,7 @@ Runner stderr from the clean run was empty.
 ## Public Frontend
 
 - URL: https://smmyth.github.io/clawguard-ai-wallets-demo/
-- Static build repo: https://github.com/smmyth/clawguard-ai-wallets-demo
+- Deployed static build repo: https://github.com/smmyth/clawguard-ai-wallets-demo
 - GitHub Pages status observed as `built`.
 - HTML, CSS, JS, and proof JSON returned HTTP `200`.
 

@@ -210,6 +210,7 @@ button {
 .policy-panel,
 .composer-panel,
 .verdict-panel,
+.ai-trace-panel,
 .timeline-panel {
   padding: 22px;
 }
@@ -423,6 +424,85 @@ textarea:focus {
   line-height: 1.55;
 }
 
+.ai-trace-panel {
+  display: grid;
+  grid-column: 1 / -1;
+  gap: 18px;
+}
+
+.engine-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.engine-row div {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #0b1214;
+}
+
+.engine-row span {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.engine-row strong {
+  overflow-wrap: anywhere;
+  color: var(--text);
+  font-size: 14px;
+}
+
+.trace-list {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.trace-step {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 10px;
+  min-height: 112px;
+  padding: 14px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #0b1214;
+}
+
+.trace-step.pass svg {
+  color: var(--green);
+}
+
+.trace-step.warn svg {
+  color: var(--yellow);
+}
+
+.trace-step.fail svg {
+  color: var(--red);
+}
+
+.trace-step strong {
+  display: block;
+  margin-bottom: 6px;
+}
+
+.trace-step p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
 .timeline-panel {
   display: grid;
   gap: 20px;
@@ -560,7 +640,8 @@ textarea:focus {
     grid-column: 1 / -1;
   }
 
-  .timeline {
+  .timeline,
+  .trace-list {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
@@ -613,8 +694,10 @@ textarea:focus {
 
   .hero-grid,
   .timeline,
+  .trace-list,
   .link-grid,
-  .receipt-strip {
+  .receipt-strip,
+  .engine-row {
     grid-template-columns: 1fr;
   }
 

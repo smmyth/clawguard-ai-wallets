@@ -1,9 +1,10 @@
 import { useMemo, useState } from "react";
 import { Bot, CircleAlert, CirclePlay, RadioTower, ReceiptText, RotateCcw, ShieldCheck, WalletCards } from "lucide-react";
 import { AgentPolicyCard } from "./components/AgentPolicyCard";
+import { AiTracePanel } from "./components/AiTracePanel";
 import { AiVerdictPanel } from "./components/AiVerdictPanel";
 import { RunTimeline } from "./components/RunTimeline";
-import { Verdict, contractAddresses, demoInstruction, explorerBaseUrl, sampleTxs } from "./lib/demoData";
+import { Verdict, contractAddresses, demoInstruction, explorerBaseUrl, makeReplayAuditProof, sampleTxs } from "./lib/demoData";
 import { requestRunOnChain } from "./lib/contracts";
 
 type Mode = "replay" | "wallet";
@@ -18,6 +19,10 @@ export default function App() {
 
   const canUseWallet = Boolean(contractAddresses.ledger);
   const assetBase = import.meta.env.BASE_URL;
+  const liveProofPath = "proofs/generated/run-4-allowed.json";
+  const replayProof = useMemo(() => makeReplayAuditProof(instruction), [instruction]);
+  const hasCompletedVerdict = status === "allowed" || status === "warning" || status === "blocked";
+  const replayRiskScore = mode === "replay" && hasCompletedVerdict ? replayProof.riskScore : undefined;
 
   const statusLabel = useMemo(() => {
     if (status === "idle") return "Ready";
@@ -40,9 +45,6 @@ export default function App() {
         const receipt = await requestRunOnChain(instruction);
         setRequestTx(receipt?.hash);
         setStatus("auditing");
-        window.setTimeout(() => {
-          setStatus("allowed");
-        }, 180);
       } catch (runError) {
         setStatus("error");
         setError(runError instanceof Error ? runError.message : "Wallet request failed.");
@@ -55,7 +57,7 @@ export default function App() {
       window.setTimeout(() => {
         setRequestTx(sampleTxs.request);
         setAuditTx(sampleTxs.audit);
-        setStatus(instruction.toLowerCase().includes("shell") ? "blocked" : "allowed");
+        setStatus(replayProof.verdict.toLowerCase() as Verdict);
       }, 180);
     }, 120);
   }
@@ -102,7 +104,7 @@ export default function App() {
         <section className="visual-band" aria-label="ClawGuard receipt concept">
           <img
             src={`${assetBase}clawguard-concept.png`}
-            alt="ClawGuard dashboard concept showing policy, instruction, AI verdict, and Mantle receipt timeline"
+            alt="ClawGuard dashboard concept showing policy, instruction, policy audit verdict, and Mantle receipt timeline"
           />
         </section>
 
@@ -163,10 +165,17 @@ export default function App() {
             )}
           </section>
 
-          <AiVerdictPanel status={status} />
+          <AiVerdictPanel status={status} riskScore={replayRiskScore} />
+
+          <AiTracePanel
+            engine={replayProof.engine}
+            model={replayProof.model}
+            fallbackUsed={replayProof.fallbackUsed}
+            trace={replayProof.trace}
+          />
         </div>
 
-        <RunTimeline status={status} requestTx={requestTx} auditTx={auditTx} />
+        <RunTimeline status={status} requestTx={requestTx} auditTx={auditTx} useSampleTxs={mode === "replay"} />
 
         <section className="receipt-strip" aria-label="Submission readiness">
           <div>
@@ -182,9 +191,9 @@ export default function App() {
             <span>{contractAddresses.ledger || "pending deployment"}</span>
           </div>
           <div>
-            <strong>Replay proof</strong>
-            <a href={`${assetBase}proofs/sample-run-allowed.json`} target="_blank" rel="noreferrer">
-              sample-run-allowed.json
+            <strong>Live proof</strong>
+            <a href={`${assetBase}${liveProofPath}`} target="_blank" rel="noreferrer">
+              run-4-allowed.json
             </a>
           </div>
         </section>
