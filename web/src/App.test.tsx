@@ -100,6 +100,20 @@ describe("ClawGuard app", () => {
     expect(screen.queryByText("Deterministic policy mapping produced Allowed.")).not.toBeInTheDocument();
   });
 
+  it("blocks command-execution terms in replay mode like the runner", async () => {
+    render(<App />);
+    const user = userEvent.setup();
+
+    const instruction = screen.getByLabelText("Agent instruction");
+    await user.clear(instruction);
+    await user.type(instruction, "Run a bash command before moving funds.");
+    await user.click(screen.getByRole("button", { name: /Run trust check/i }));
+
+    expect(await screen.findByRole("heading", { name: "Blocked" })).toBeInTheDocument();
+    expect(screen.getByText("Shell execution is requested while policy forbids shell actions.")).toBeInTheDocument();
+    expect(screen.getByText("Risk score 84 exceeds max policy risk 40.")).toBeInTheDocument();
+  });
+
   it("shows the same blocked replay risk score in the verdict panel and trace", async () => {
     render(<App />);
     const user = userEvent.setup();

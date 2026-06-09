@@ -16,7 +16,7 @@ Use Agentic Economy only as an adjacent narrative unless a real Byreal Agent Ski
 
 - Smart contract deployed on Mantle Mainnet or Testnet: yes, Mantle Sepolia chain `5003`.
 - Contract source verification: V2 contracts are Sourcify full-match verified on Mantle Sepolia chain `5003`. The Mantle explorer address pages are public; the Etherscan-style API returned HTML instead of JSON during Hardhat verification, so do not claim successful Etherscan-style API verification for V2.
-- At least one AI-agent audit workflow connected to on-chain calls: yes, `requestRun` creates the on-chain trigger, the runner writes `recordAuditResult`, the runner finalizes the action commitment, and `AgentWallet.executeAction` releases testnet value only after the finalized receipt. The current public receipt uses the deterministic policy engine; model-backed rationale is optional and should only be claimed when `OPENAI_API_KEY` is exercised.
+- At least one AI-agent audit workflow connected to on-chain calls: yes, `requestRun` creates the on-chain trigger, the runner writes `recordAuditResult`, the runner finalizes the action commitment, and `AgentWallet.executeAction` releases testnet value only after the finalized receipt. `AgentWallet.sweep` is an owner-only recovery path for leftover testnet balance, not the agent execution path. The current public receipt uses the deterministic policy engine; model-backed rationale is optional and should only be claimed when `OPENAI_API_KEY` is exercised.
 - Frontend demo publicly accessible, not localhost: yes.
 - Deployment address ready for DoraHacks submission: yes.
 - Demo video at least 2 minutes: yes, local WebM metadata shows `127.48` seconds.
@@ -52,7 +52,7 @@ ClawGuard turns AI wallet decisions into Mantle Sepolia trust receipts: policy i
 
 Short pitch:
 
-ClawGuard is a trust receipt layer for AI wallet agents. A Personal CFO-style agent submits an instruction, an audit runner checks it against a declared policy and tool inventory, `AgentRunLedgerV2` records the policy audit result on Mantle Sepolia, and `AgentWallet` executes only after a finalized receipt commits to the action. The public demo shows the full receipt path: policy, instruction, policy audit verdict, risk score, proof JSON, explorer links, and gated execution evidence.
+ClawGuard is a trust receipt layer for AI wallet agents. A Personal CFO-style agent submits an instruction, an audit runner checks it against a declared policy and tool inventory, `AgentRunLedgerV2` records the policy audit result on Mantle Sepolia, and `AgentWallet.executeAction` executes only after a finalized receipt commits to the action. The public demo shows the full receipt path: policy, instruction, policy audit verdict, risk score, proof JSON, explorer links, and gated execution evidence.
 
 Safe claims:
 

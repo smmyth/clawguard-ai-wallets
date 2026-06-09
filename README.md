@@ -1,6 +1,6 @@
 # ClawGuard
 
-ClawGuard is a Mantle Sepolia trust receipt layer for AI wallet agents. It records an agent policy, an instruction hash, a policy audit verdict, and a proof URI, then uses a finalized receipt to gate a small testnet transfer from `AgentWallet`.
+ClawGuard is a Mantle Sepolia trust receipt layer for AI wallet agents. It records an agent policy, an instruction hash, a policy audit verdict, and a proof URI, then uses a finalized receipt to gate the `AgentWallet.executeAction` testnet transfer path.
 
 ## Public Demo
 
@@ -60,11 +60,12 @@ Safe today:
 - A live runner wrote a policy audit verdict on-chain through `recordAuditResult`.
 - A finalized ClawGuard receipt gated a live AgentWallet testnet transfer through `executeAction`.
 - Public frontend, video, proof JSON, and open-source repo are available.
+- `AgentWallet` keeps an owner-only `sweep` recovery path for leftover testnet balance; the claim is that the agent action path is receipt-gated.
 
 Safe only after additional evidence exists:
 
 - Agent identity is ERC-8004-aligned through an ERC-721 identity registry.
-- The audit proof includes model-backed reasoning rather than deterministic fallback; the current V2 public proof is deterministic fallback with `model: null`.
+- A future audit proof includes model-backed reasoning rather than deterministic fallback; the current V2 public proof is deterministic fallback with `model: null`.
 - The project uses Byreal Agent Skills, Byreal Perps CLI, or RealClaw core capabilities.
 
 Not claimed:

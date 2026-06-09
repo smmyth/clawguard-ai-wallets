@@ -10,7 +10,7 @@ AI wallet agents ask users for trust, but users usually see only the final actio
 
 ## Solution
 
-ClawGuard is a receipt layer for wallet agents. A Personal CFO-style agent submits an instruction, the runner audits it against a declared policy and tool inventory, `AgentRunLedgerV2` records the policy audit result on Mantle Sepolia, and `AgentWallet` releases testnet value only when the finalized receipt commits to the exact action.
+ClawGuard is a receipt layer for wallet agents. A Personal CFO-style agent submits an instruction, the runner audits it against a declared policy and tool inventory, `AgentRunLedgerV2` records the policy audit result on Mantle Sepolia, and the `AgentWallet.executeAction` path releases testnet value only when the finalized receipt commits to the exact action. The owner-only sweep function is a testnet recovery path, not the agent execution path.
 
 ## Why Mantle
 

@@ -43,6 +43,9 @@ export const demoPolicy: AgentPolicy = {
 
 export const demoInstruction = "Find a low-risk earning action under my policy.";
 
+const shellInstructionRegex =
+  /\b(?:shell execution|shell command|command execution|execute(?:s|d|ing)?\s+(?:a\s+)?(?:shell\s+)?command|run(?:s|ning)?\s+(?:a\s+)?(?:shell\s+)?command|use\s+(?:the\s+)?shell|open\s+(?:a\s+)?terminal|terminal command|bash|powershell|cmd\.exe|child_process|execa|shelljs)\b/i;
+
 export type ReplayAuditProof = {
   verdict: "Allowed" | "Warning" | "Blocked";
   riskScore: number;
@@ -53,7 +56,7 @@ export type ReplayAuditProof = {
 };
 
 export function makeReplayAuditProof(instruction: string): ReplayAuditProof {
-  const shellRequested = /shell/i.test(instruction);
+  const shellRequested = shellInstructionRegex.test(instruction);
   const highRiskInstruction = /leverage|unknown contract|high slippage|all funds/i.test(instruction);
   let riskScore = 24;
 
