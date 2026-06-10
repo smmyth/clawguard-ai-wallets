@@ -185,12 +185,18 @@ Copy `.env.example` to `.env` and set:
 - `PRIVATE_KEY`
 - `AGENT_REGISTRY_ADDRESS`
 - `AGENT_RUN_LEDGER_ADDRESS`
+- optional `AGENT_WALLET_ADDRESS`
 - optional `RUNNER_FINALIZE_ACTION=true`
+- optional `RUNNER_INSTRUCTION`
 - optional `AGENT_ACTION_RECIPIENT`
 - optional `AGENT_ACTION_AMOUNT_WEI`
+- optional `MANTLE_EXPLORER_API_KEY`
+- optional `MANTLE_EXPLORER_API_URL`
 - optional `VITE_AGENT_WALLET_ADDRESS`
 - optional `VITE_AGENT_ACTION_HASH`
 - optional `VITE_AGENT_EXECUTION_TX`
+- optional `VITE_BASE_PATH`
+- optional `VITE_ASSETS_DIR`
 - optional `OPENAI_API_KEY`
 
 Do not commit `.env`. The repository uses a local burner key only for testnet deployment and demo transactions.

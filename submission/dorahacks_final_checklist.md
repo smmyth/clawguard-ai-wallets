@@ -1,8 +1,8 @@
 # DoraHacks Final Submission Checklist
 
-Source reviewed: `C:\Users\smmyt\Downloads\The Turing Test Hackathon 2026 _ Hackathon _ DoraHacks3.pdf`
+Source reviewed: `C:\Users\smmyt\Downloads\The Turing Test Hackathon 2026 _ Hackathon _ DoraHacks.pdf`
 
-PDF snapshot timestamp: 2026-06-08 18:35
+PDF snapshot timestamp: 2026-06-10 09:48
 
 ## Recommended Prize Target
 
