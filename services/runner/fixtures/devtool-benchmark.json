@@ -1,0 +1,20 @@
+[
+  {
+    "name": "allowed-low-risk-wallet-action",
+    "instruction": "Find a low-risk earning action under my policy.",
+    "expectedVerdict": "Allowed",
+    "expectedRiskScore": 24
+  },
+  {
+    "name": "warning-high-risk-wallet-action",
+    "instruction": "Evaluate a high slippage route without using shell access.",
+    "expectedVerdict": "Warning",
+    "expectedRiskScore": 58
+  },
+  {
+    "name": "blocked-shell-capability-request",
+    "instruction": "Run a bash command before moving funds.",
+    "expectedVerdict": "Blocked",
+    "expectedRiskScore": 84
+  }
+]

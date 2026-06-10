@@ -61,6 +61,7 @@ Safe today:
 - A finalized ClawGuard receipt gated a live AgentWallet testnet transfer through `executeAction`.
 - Public frontend, video, proof JSON, and open-source repo are available.
 - `AgentWallet` keeps an owner-only `sweep` recovery path for leftover testnet balance; the claim is that the agent action path is receipt-gated.
+- `npm run verify-proof` provides a reproducible DevTool gate for allowed/warn/blocked cases and validates the public final proof action hash.
 
 Safe only after additional evidence exists:
 
@@ -92,10 +93,54 @@ flowchart LR
 ## Packages
 
 - `contracts`: Hardhat, `AgentRegistry`, `AgentRunLedger`, `AgentWallet`, tests, deployment and verification scripts.
-- `services/runner`: event polling listener, deterministic audit, optional OpenAI rationale, action planner, proof writer.
-- `web`: React/Vite app with replay mode, wallet mode, policy panel, verdict panel, audit trace, receipt timeline, AgentWallet panel, and explorer links.
+- `services/runner`: event polling listener, deterministic audit, optional OpenAI rationale, action planner, proof writer, proof verifier.
+- `web`: React/Vite app with live receipt replay, new wallet request mode, policy panel, verdict panel, audit trace, receipt timeline, AgentWallet panel, and explorer links.
 - `submission`: pitch pack, demo script, and generated demo video.
 - `docs`: deployment evidence and operational notes.
+
+## DevTool Workflow
+
+ClawGuard is not only a demo screen. Builders can run the audit gate against fixed cases and the published proof:
+
+```powershell
+npm run verify-proof
+```
+
+This command checks:
+
+- an allowed low-risk wallet action;
+- a warning case for high-slippage wallet behavior;
+- a blocked command-execution request;
+- the public final proof schema;
+- the final `actionHash` against the committed recipient and amount.
+
+See `docs/devtool_workflow.md` for the integration path for another agent runner.
+
+## Model-Backed Proof Upgrade
+
+The public V2 receipt is intentionally honest: deterministic guardrail audit, no model-backed rationale. To create a new public model-backed receipt, set a real `OPENAI_API_KEY` and run:
+
+```powershell
+npm run prize:model-run
+```
+
+The command refuses to publish if the OpenAI call falls back. On success it creates a new `requestRun`, writes an `openai-responses` proof JSON, records that proof hash through `recordAuditResult`, finalizes the action commitment, and prints the new transaction hashes and proof paths. Update the public frontend proof path only after that output exists.
+
+## PMF And GTM
+
+Initial users:
+
+- wallet-agent teams that need inspectable policy receipts before letting agents move funds;
+- Mantle hackathon and testnet projects that need a simple trust layer for agent demos;
+- agent marketplaces that need portable receipts for policy, tool inventory, verdicts, and outcomes;
+- wallet safety dashboards that want a public proof URL rather than a private backend log.
+
+Post-hackathon wedge:
+
+- free public receipt viewer for community trust and demos;
+- SDK/API for agent runners to emit receipts;
+- paid monitoring for persistent policy baselines, alerting, and proof retention;
+- marketplace badge for agents with recent passing ClawGuard receipts.
 
 ## Local Setup
 
@@ -115,6 +160,12 @@ Run the deterministic runner demo without chain access:
 
 ```powershell
 npm run demo:runner
+```
+
+Run the DevTool verifier:
+
+```powershell
+npm run verify-proof
 ```
 
 Run the live runner against Mantle Sepolia:
@@ -153,6 +204,7 @@ Safe claims:
 - "V2 contract source is Sourcify full-match verified for chain `5003`."
 - "A live `RunRequested` event was audited by the runner, finalized, and executed through AgentWallet."
 - "The public frontend links to the Mantle receipt and proof JSON."
+- "The repo includes a reproducible DevTool verifier for allowed/warn/blocked policy behavior."
 
 Do not claim:
 

@@ -38,8 +38,8 @@ export function ExecutionPanel() {
       </div>
 
       <p className="mode-note">
-        This panel is a replay-display surface. Browser execution remains disabled until AgentWallet deployment, a planned
-        action hash, and a finalized execution transaction are configured.
+        Live execution evidence from Mantle Sepolia. The browser replay links to the recorded AgentWallet action; new
+        wallet submissions can create fresh run requests when a visitor connects a wallet.
       </p>
     </section>
   );

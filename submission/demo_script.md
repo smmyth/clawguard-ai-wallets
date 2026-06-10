@@ -20,11 +20,11 @@ This agent has an explicit policy: maximum risk 40, network access allowed, shel
 
 ## 0:35-0:55
 
-Click `Run trust check` in replay mode.
+Click `Run trust check` in live receipt replay.
 
 Narration:
 
-The agent asks for a low-risk earning action. ClawGuard turns that request into a receipt flow: request, audit, receipt, explorer.
+The agent asks for a low-risk earning action. This public replay follows the already-recorded Mantle receipt flow: request, audit, proof, explorer, and gated execution.
 
 ## 0:55-1:15
 
@@ -32,7 +32,7 @@ Show the verdict panel, receipt timeline, and AgentWallet panel.
 
 Narration:
 
-The policy audit verdict is Allowed with risk score 24. The rationale is deterministic and can optionally be rewritten through OpenAI when a key is configured, but the fallback is always available. The AgentWallet panel shows the committed action hash and execution evidence.
+The policy audit verdict is Allowed with risk score 24. The current public receipt uses the deterministic guardrail audit; the repo includes a `prize:model-run` command that refuses fallback and publishes a model-backed OpenAI proof only after a real API call succeeds. The AgentWallet panel shows the committed action hash and execution evidence.
 
 ## 1:15-1:35
 
@@ -44,11 +44,11 @@ The public demo uses real Mantle Sepolia contracts. The live V2 run is `runId=1`
 
 ## 1:35-1:50
 
-Show the public proof JSON.
+Show the public proof JSON and mention the verifier.
 
 Narration:
 
-The final proof JSON records the agent, instruction, policy, capabilities, verdict, risk score, rationale, trace, and action plan. The ledger stores the audit hash, final proof URI, and action hash that AgentWallet checks before releasing testnet value.
+The final proof JSON records the agent, instruction, policy, capabilities, verdict, risk score, rationale, trace, and action plan. The ledger stores the audit hash, final proof URI, and action hash that AgentWallet checks before releasing testnet value. Developers can reproduce the audit cases and proof action hash with `npm run verify-proof`.
 
 ## 1:50-2:05
 

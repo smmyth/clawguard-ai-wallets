@@ -12,6 +12,8 @@ ClawGuard turns AI wallet decisions into Mantle Sepolia trust receipts: policy i
 
 ClawGuard is a trust receipt layer for AI wallet agents. A Personal CFO-style agent submits an instruction, an audit runner checks it against a declared policy and tool inventory, `AgentRunLedgerV2` records the policy audit result on Mantle Sepolia, and the `AgentWallet.executeAction` path only releases testnet value after the finalized receipt commits to the exact recipient and amount. The wallet keeps an owner-only sweep recovery path for leftover testnet balance. The public demo shows the full receipt path: policy, instruction, policy audit verdict, risk score, final proof JSON, explorer links, and gated execution evidence.
 
+The repo also includes a reproducible DevTool verifier: `npm run verify-proof` checks allowed, warning, and blocked policy cases, parses the public final proof, and recomputes the committed action hash. The next model-backed run path is `npm run prize:model-run`, which requires a real `OPENAI_API_KEY` and refuses to publish if the OpenAI call falls back.
+
 ## Public Demo
 
 https://smmyth.github.io/clawguard-ai-wallets-demo/

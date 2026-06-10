@@ -36,6 +36,28 @@ The demo uses Mantle Sepolia chain `5003` for public, low-cost trust receipts. T
 
 Start as a trust receipt for RealClaw-style AI wallet agents. Expand into a policy and evidence layer for agent marketplaces, custody-adjacent tools, testnet competitions, and future production-grade wallet-agent workflows.
 
+## PMF / GTM
+
+Who uses it first:
+
+- AI wallet teams that need a public receipt before an agent moves funds.
+- Mantle builders adding agent actions to hackathon or testnet apps.
+- Agent marketplaces that need portable trust badges for policy, tool inventory, verdicts, and outcomes.
+- Wallet safety dashboards that want a proof URL instead of a private log.
+
+How it grows:
+
+- Free receipt viewer for public demos and community trust.
+- SDK/API for agent runners to emit ClawGuard receipts.
+- Paid monitoring for persistent policy baselines, alerting, and proof retention.
+- Marketplace badge for agents with recent passing receipts.
+
+## DevTool Evidence
+
+`npm run verify-proof` is the reproducible developer gate. It checks allowed, warning, and blocked benchmark cases, parses the public final proof, and recomputes the committed action hash from recipient and amount.
+
+`npm run prize:model-run` is the model-backed upgrade path. It requires a real `OPENAI_API_KEY`, refuses deterministic fallback, writes the OpenAI-backed proof JSON, records the proof hash on Mantle, and finalizes the action commitment.
+
 ## Honest Claims
 
 Safe to claim:
@@ -44,6 +66,7 @@ Safe to claim:
 - The runner audited a live request, recorded `RunAudited`, finalized the run, and AgentWallet executed the committed action.
 - The public frontend shows policy, instruction, verdict, proof, and explorer links.
 - The V2 contracts are Sourcify full-match verified.
+- The repo includes a reproducible DevTool verifier for allowed/warning/blocked policy behavior.
 
 Do not claim:
 
@@ -56,7 +79,7 @@ Do not claim:
 
 - 20 Project Deployment Award: strongest fit; deployed contracts, Sourcify full-match verification, public app, live finalized receipt, AgentWallet execution, public video, and README evidence.
 - Secondary targets: Best UI/UX, AI DevTools, and Community Voting.
-- Agentic Economy: adjacent fit as a trust layer for RealClaw-style AI wallet workflows; do not present it as a production Byreal/RealClaw core-capability integration unless that integration is added.
-- AI DevTools: a receipt/audit layer developers can integrate into agent runners.
-- Best UI/UX: first screen is the product workflow, with replay and wallet modes.
+- Agentic Economy: do not select as a judged target unless `submission/byreal_evidence.md` contains successful Byreal Agent Skills, Byreal Perps CLI, or RealClaw evidence.
+- AI DevTools: a receipt/audit layer developers can integrate into agent runners, with a reproducible `verify-proof` workflow.
+- Best UI/UX: first screen is the product workflow, with live receipt replay and new wallet request mode.
 - Community Voting: clear story: would you trust an AI wallet, and where is the proof?

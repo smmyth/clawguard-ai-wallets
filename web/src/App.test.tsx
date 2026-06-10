@@ -42,7 +42,7 @@ describe("ClawGuard app", () => {
     );
   });
 
-  it("renders the execution panel with configured replay-display links", () => {
+  it("renders the execution panel with configured live evidence links", () => {
     const walletAddress = "0x0000000000000000000000000000000000000002";
     const actionHash = `0x${"2".repeat(64)}`;
 
@@ -82,7 +82,7 @@ describe("ClawGuard app", () => {
     expect(await screen.findByRole("heading", { name: "Allowed" })).toBeInTheDocument();
     expect(screen.getByText("Request tx")).toBeInTheDocument();
     expect(screen.getByText("Audit tx")).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "Policy engine fallback" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Deterministic guardrail audit" })).toBeInTheDocument();
   });
 
   it("blocks a shell instruction in replay mode", async () => {
@@ -137,7 +137,7 @@ describe("ClawGuard app", () => {
     render(<App />);
     const user = userEvent.setup();
 
-    await user.click(screen.getByRole("button", { name: "Wallet mode" }));
+    await user.click(screen.getByRole("button", { name: "New wallet request" }));
     await user.click(screen.getByRole("button", { name: /Run trust check/i }));
 
     expect(requestRunOnChainMock).toHaveBeenCalledWith("Find a low-risk earning action under my policy.");
@@ -156,12 +156,12 @@ describe("ClawGuard app", () => {
     render(<App />);
     const user = userEvent.setup();
 
-    await user.click(screen.getByRole("button", { name: "Wallet mode" }));
+    await user.click(screen.getByRole("button", { name: "New wallet request" }));
     await user.click(screen.getByRole("button", { name: /Run trust check/i }));
 
     expect(requestRunOnChainMock).not.toHaveBeenCalled();
     expect(await screen.findByRole("alert")).toHaveTextContent(
-      "Wallet mode needs VITE_AGENT_RUN_LEDGER_ADDRESS before it can submit on-chain."
+      "New wallet request needs VITE_AGENT_RUN_LEDGER_ADDRESS before it can submit on-chain."
     );
     expect(screen.getByText("Audit tx pending")).toBeInTheDocument();
 

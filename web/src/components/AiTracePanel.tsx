@@ -15,7 +15,7 @@ export function AiTracePanel({ engine, model, fallbackUsed, trace }: Props) {
       <div className="panel-heading">
         <div>
           <p className="section-label">Audit trace</p>
-          <h2 id="trace-title">{fallbackUsed ? "Policy engine fallback" : "Model-backed rationale"}</h2>
+          <h2 id="trace-title">{fallbackUsed ? "Deterministic guardrail audit" : "Model-backed audit"}</h2>
         </div>
         <Cpu size={22} />
       </div>
@@ -26,8 +26,8 @@ export function AiTracePanel({ engine, model, fallbackUsed, trace }: Props) {
           <strong>{engine}</strong>
         </div>
         <div>
-          <span>Model</span>
-          <strong>{model ?? "No model"}</strong>
+          <span>Model status</span>
+          <strong>{model ?? "Model-backed path ready"}</strong>
         </div>
       </div>
 

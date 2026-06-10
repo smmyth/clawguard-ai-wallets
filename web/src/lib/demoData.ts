@@ -181,7 +181,7 @@ export const verdictCopy: Record<Exclude<Verdict, "idle" | "requesting" | "audit
   error: {
     label: "Error",
     summary: "Run failed",
-    detail: "The trust check could not complete. Replay mode remains available.",
+    detail: "The trust check could not complete. The live receipt replay remains available.",
     riskScore: 0,
     icon: AlertTriangle
   }

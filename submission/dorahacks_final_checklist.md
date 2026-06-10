@@ -17,6 +17,7 @@ Use Agentic Economy only as an adjacent narrative unless a real Byreal Agent Ski
 - Smart contract deployed on Mantle Mainnet or Testnet: yes, Mantle Sepolia chain `5003`.
 - Contract source verification: V2 contracts are Sourcify full-match verified on Mantle Sepolia chain `5003`. The Mantle explorer address pages are public; the Etherscan-style API returned HTML instead of JSON during Hardhat verification, so do not claim successful Etherscan-style API verification for V2.
 - At least one AI-agent audit workflow connected to on-chain calls: yes, `requestRun` creates the on-chain trigger, the runner writes `recordAuditResult`, the runner finalizes the action commitment, and `AgentWallet.executeAction` releases testnet value only after the finalized receipt. `AgentWallet.sweep` is an owner-only recovery path for leftover testnet balance, not the agent execution path. The current public receipt uses the deterministic policy engine; model-backed rationale is optional and should only be claimed when `OPENAI_API_KEY` is exercised.
+- DevTool reproducibility: yes, `npm run verify-proof` checks allowed/warning/blocked benchmark cases and validates the public final proof action hash.
 - Frontend demo publicly accessible, not localhost: yes.
 - Deployment address ready for DoraHacks submission: yes.
 - Demo video at least 2 minutes: yes, local WebM metadata shows `127.48` seconds.
@@ -60,10 +61,12 @@ Safe claims:
 - V2 contracts Sourcify full-match verified.
 - Live runner wrote a policy audit result on-chain, finalized it, and AgentWallet executed the committed action.
 - Public frontend, public video, public proof JSON, and open-source repo are available.
+- Reproducible DevTool verifier exists through `npm run verify-proof`.
 
 Do not claim:
 
-- Production Byreal/RealClaw integration.
+- Production Byreal/RealClaw integration, unless `submission/byreal_evidence.md` is updated with successful sponsor-tool evidence.
+- OpenAI-generated rationale, unless a successful `npm run prize:model-run` output exists and the public proof path is updated to that run.
 - Mantle mainnet custody.
 - RWA functionality.
 - Alpha/Data track fit based on Mantle on-chain data as a core data source.
@@ -73,8 +76,8 @@ Do not claim:
 
 - 20 Project Deployment Award: requirements met by available evidence.
 - Best UI/UX: frontend and public video requirements met.
-- AI DevTools: eligible as a receipt/audit layer developers can integrate into agent runners.
+- AI DevTools: eligible as a receipt/audit layer developers can integrate into agent runners; `npm run verify-proof` gives benchmark and proof-hash evidence.
 - Community Voting: eligible after DoraHacks submission; winning requires campaign execution.
-- Agentic Economy First Prize: not fully met as implemented because the PDF asks for genuine Byreal Agent Skills, Byreal Perps CLI, or RealClaw core-capability use.
+- Agentic Economy First Prize: do not select as a judged target until `submission/byreal_evidence.md` contains genuine Byreal Agent Skills, Byreal Perps CLI, or RealClaw core-capability evidence.
 - Alpha & Data First Prize: not met as implemented because Mantle on-chain data is not the core AI data source.
 - AI & RWA First Prize: not met as implemented because the product does not involve Real World Assets.

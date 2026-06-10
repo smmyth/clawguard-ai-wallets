@@ -44,7 +44,7 @@ export default function App() {
     if (mode === "wallet") {
       if (!canUseWallet) {
         setStatus("error");
-        setError("Wallet mode needs VITE_AGENT_RUN_LEDGER_ADDRESS before it can submit on-chain.");
+        setError("New wallet request needs VITE_AGENT_RUN_LEDGER_ADDRESS before it can submit on-chain.");
         return;
       }
 
@@ -139,10 +139,10 @@ export default function App() {
 
             <div className="mode-switch" role="group" aria-label="Run mode">
               <button className={mode === "replay" ? "selected" : ""} onClick={() => setMode("replay")} type="button">
-                Replay mode
+                Live receipt replay
               </button>
               <button className={mode === "wallet" ? "selected" : ""} onClick={() => setMode("wallet")} type="button">
-                Wallet mode
+                New wallet request
               </button>
             </div>
 
@@ -158,10 +158,10 @@ export default function App() {
 
             <p className="mode-note">
               {mode === "replay"
-                ? "Replay mode is public-demo safe. It shows the exact receipt flow without requiring a wallet."
+                ? "Public replay of a live Mantle run: request, audit, proof, and gated AgentWallet execution without requiring a visitor wallet."
                 : canUseWallet
-                  ? "Wallet mode will call requestRun on the configured AgentRunLedger."
-                  : "Wallet mode needs VITE_AGENT_RUN_LEDGER_ADDRESS before it can submit on-chain."}
+                  ? "New wallet request will call requestRun on the configured AgentRunLedger."
+                  : "New wallet request needs VITE_AGENT_RUN_LEDGER_ADDRESS before it can submit on-chain."}
             </p>
 
             {error && (
