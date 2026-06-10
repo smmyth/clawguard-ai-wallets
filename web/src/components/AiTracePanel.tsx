@@ -27,7 +27,7 @@ export function AiTracePanel({ engine, model, fallbackUsed, trace }: Props) {
         </div>
         <div>
           <span>Model status</span>
-          <strong>{model ?? "Model-backed path ready"}</strong>
+          <strong>{model ?? "Model-backed upgrade available"}</strong>
         </div>
       </div>
 
